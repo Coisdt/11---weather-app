@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 22px;
+}
+
+.btn {
+  border: 2px solid;
+}
+
+.search-bar-section {
+  align-self: center;
+}
+
+.search-bar-container {
+  padding: 20px;
+}
+
+#search-input {
+  border: 2px solid;
+  padding: 2px;
+}
+
+.search-btn {
+  padding: 3.5px;
+}
+
+.wind-speed {
+  height: 20px;
+  width: 100px;
+  border: 2px solid;
+}
