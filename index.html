@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <section class="weather-app">
+      <div class="app-center">
+        <!-- search bar -->
+        <section class="search-bar-section">
+          <article class="search-bar-container">
+            <input
+              type="text"
+              name="search"
+              id="search-input"
+              placeholder="enter a city"
+              value="berlin"
+            />
+            <i class="search-btn btn fa-solid fa-magnifying-glass"></i>
+          </article>
+        </section>
+        <!-- search bar end -->
+        <!-- display -->
+        <section class="weather-display-section">
+          <div class="weather-display-container">
+            <article class="wind-speed"></article>
+            <article class="temperature"></article>
+            <article class="sky-cover"></article>
+          </div>
+        </section>
+        <!-- display end-->
+      </div>
+    </section>
+  </body>
+  <script src="app.js"></script>
+</html>
