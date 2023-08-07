@@ -2,32 +2,204 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-size: 22px;
+  font-size: 18px;
+  color: var(--text-clr);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  /* background-color: rgb(187, 196, 199); */
+}
+
+:root {
+  --background-clr: #063863;
+  --hightligt-clr: #0197f6;
+  --text-clr: #eee5e9;
+}
+
+.fa-solid {
+  color: var(--hightligt-clr);
 }
 
 .btn {
   border: 2px solid;
 }
 
+/* ============================================ main */
+
+.weather-app {
+  display: grid;
+  padding: 20px;
+  width: 370px;
+  /* height: 500px; */
+}
+
+.app-title {
+  display: grid;
+  justify-content: center;
+  color: var(--hightligt-clr);
+  font-size: 30px;
+  padding-bottom: 10px;
+}
+.app-center {
+  display: flex;
+  flex-direction: column;
+  /* height: 500px; */
+}
+
+/*  =========================================== search bar */
 .search-bar-section {
-  align-self: center;
+  display: grid;
+  background-color: var(--background-clr);
+  align-items: center;
+  width: 100%;
+  height: 65px;
+  justify-content: center;
+  border: 1px solid;
 }
 
 .search-bar-container {
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 0.7fr 5fr 1fr;
+  justify-items: center;
+  align-items: center;
 }
 
 #search-input {
-  border: 2px solid;
-  padding: 2px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 4px;
+  color: black;
+  outline: none;
+  background-color: rgb(176, 200, 231);
 }
 
 .search-btn {
   padding: 3.5px;
+  border: 1px solid;
+  border-radius: 5px;
+  height: fit-content;
+  width: 30px;
+  justify-self: center;
+  align-self: center;
 }
 
-.wind-speed {
-  height: 20px;
-  width: 100px;
-  border: 2px solid;
+.error-message {
+  display: none;
+  height: 50px;
+  background-color: var(--text-clr);
+  place-content: center;
+  color: black;
+}
+
+.show-error {
+  display: grid;
+}
+
+/* ============================================== display */
+
+.city-name {
+  display: grid;
+  height: 30px;
+  font-weight: 100;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+.weather-display-section {
+  display: none;
+  background-color: rgba(47, 72, 109, 0.712);
+  width: 100%;
+  gap: 30px;
+}
+
+.show {
+  display: grid;
+}
+
+.weather-display-container {
+  display: grid;
+  height: 400px;
+}
+
+.main-forecast {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 110px;
+}
+
+.temperature {
+  font-size: 70px;
+  display: flex;
+  place-self: center;
+  height: 100%;
+  height: fit-content;
+}
+
+.weather-img i {
+  display: grid;
+  height: 100%;
+  place-content: center;
+  font-size: 70px;
+}
+
+.deg-c {
+  height: 100%;
+  font-size: 25px;
+}
+
+.sky-cover-status,
+.updated-time {
+  display: grid;
+  justify-content: center;
+  height: 15px;
+}
+
+.updated-time {
+  font-size: 12px;
+}
+
+.first,
+.second {
+  display: flex;
+  border: 1px solid;
+  padding: 10px;
+  align-items: center;
+  height: 100px;
+}
+
+.second {
+  /* height: 0px; */
+}
+
+.min-max-temp,
+.wind-speed,
+.humidity,
+.sunrise,
+.sunset {
+  display: grid;
+  font-size: 14px;
+  gap: 5px;
+  border-right: 0.5px solid;
+  height: 100%;
+  place-content: center;
+  width: 100%;
+  height: 100%;
+  justify-self: center;
+  justify-items: center;
+  align-items: center;
+}
+.humidity,
+.min-temp,
+.max-temp {
+  font-size: 14px;
+}
+
+.min-max-temp {
+  display: grid;
+  height: 100%;
+  border-left: 0.5px solid;
+}
+
+.sunrise {
+  border-left: 0.5px solid;
 }

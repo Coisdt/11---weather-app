@@ -15,27 +15,47 @@
   </head>
   <body>
     <section class="weather-app">
+      <h1 class="app-title">The Weather App</h1>
       <div class="app-center">
         <!-- search bar -->
         <section class="search-bar-section">
           <article class="search-bar-container">
+            <i class="fa-solid fa-location-dot"></i>
             <input
               type="text"
               name="search"
               id="search-input"
-              placeholder="enter a city"
-              value="berlin"
+              placeholder="Enter your location"
             />
             <i class="search-btn btn fa-solid fa-magnifying-glass"></i>
           </article>
         </section>
         <!-- search bar end -->
+        <div class="error-message"></div>
         <!-- display -->
         <section class="weather-display-section">
           <div class="weather-display-container">
-            <article class="wind-speed"></article>
-            <article class="temperature"></article>
-            <article class="sky-cover"></article>
+            <h1 class="city-name"></h1>
+            <div class="main-forecast">
+              <article class="temperature"></article>
+              <article class="weather-img"></article>
+            </div>
+            <article class="sky-cover-status"></article>
+            <article class="updated-time"></article>
+            <!-- first -->
+            <div class="first">
+              <div class="min-max-temp">
+                <article class="min-temp"></article>
+                <article class="max-temp"></article>
+              </div>
+              <article class="wind-speed"></article>
+              <article class="humidity"></article>
+            </div>
+            <!-- second -->
+            <div class="second">
+              <article class="sunrise"></article>
+              <article class="sunset"></article>
+            </div>
           </div>
         </section>
         <!-- display end-->

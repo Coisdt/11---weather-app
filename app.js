@@ -1,17 +1,20 @@
 const apiKey = "636a13530f55e030983334f5787f92f1";
 const URL = `https://api.openweathermap.org/data/2.5/weather?q=`;
+const weatherSection = document.querySelector(".weather-display-section");
 
-// fetch data
+// ============= fetch data
 async function fetchWeatherData() {
   const response = await fetch(
     URL + `${input.value}&appid=${apiKey}&units=metric`
   );
   const data = await response.json();
   console.log(data);
-  displayWeather(data);
+
+  // error
+  errorMessage(data);
 }
 
-// click event
+// ============ click event
 const searchBtn = document.querySelector(".search-btn");
 const input = document.getElementById("search-input");
 
@@ -19,14 +22,85 @@ searchBtn.addEventListener("click", () => {
   fetchWeatherData();
 });
 
-// display weather
+// ============ error message
+function errorMessage(data) {
+  const errorMessageElement = document.querySelector(".error-message");
+  const errorCode = data.cod;
+  console.log(errorCode);
+  const errorMessage = data.message;
+  if (errorCode === "400") {
+    //please note that the error code for 400 is a string in the API
+    errorMessageElement.textContent = `${errorMessage}!`;
+    errorMessageElement.classList.add("show-error");
+    weatherSection.classList.remove("show");
+    console.log("400 working");
+  } else {
+    console.log("400 NOT working");
+  }
+
+  if (errorCode === 200) {
+    //please note that the error code for 200 is a number
+    errorMessageElement.style.display = "none";
+    errorMessageElement.classList.remove("show-error");
+    weatherSection.classList.add("show");
+    displayWeather(data);
+    //show city
+    showCity(data);
+    console.log("200 working");
+  } else {
+    console.log("200 NOT working");
+  }
+  input.value = "";
+}
+
+// show city
+function showCity(data) {
+  const cityNameElement = document.querySelector(".city-name");
+  const cityName = data.name;
+  const countryData = data.sys;
+  const {country} = countryData
+  console.log(cityName);
+  cityNameElement.textContent = `${cityName}, ${country}`;
+}
+
+// ============ display weather
 function displayWeather(data) {
-  const windSpeedEle = document.querySelector(".wind-speed");
-  console.log(windSpeedEle);
+  const windSpeedElement = document.querySelector(".wind-speed");
+
   // sky cover
   const weather = data.weather;
-  const [{ main: cloudCover }] = weather;
-  console.log(cloudCover);
+  const [{ description: cloudCover }] = weather;
+
+  const weatherImg = document.querySelector(".weather-img");
+  if (cloudCover === `light rain`) {
+    weatherImg.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
+  }
+  if (cloudCover === "clear sky") {
+    weatherImg.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+  }
+  if (cloudCover === "overcast clouds") {
+    weatherImg.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+  }
+  if (cloudCover === "broken clouds") {
+    weatherImg.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+  }
+  if (cloudCover === "few clouds") {
+    weatherImg.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+  }
+
+  const skyCoverStatus = document.querySelector(".sky-cover-status");
+
+  skyCoverStatus.innerHTML =
+    `${cloudCover.charAt(0).toUpperCase()}` + `${cloudCover.slice(1)}`;
+
+  // update time
+  const date = new Date();
+  const hours = date.getHours();
+  const munites = date.getMinutes();
+
+  const timeStamp = document.querySelector(".updated-time");
+  timeStamp.innerHTML = `Updated: ${hours}:${munites}`;
+
   // temperatures
   const temp = data.main;
   const {
@@ -35,12 +109,50 @@ function displayWeather(data) {
     temp_max: maxTemp,
     humidity,
   } = temp;
-  console.log(currentTemp, maxTemp, minTemp, humidity);
+  const temperatureElement = document.querySelector(".temperature");
+  temperatureElement.innerHTML = `${Math.floor(
+    currentTemp
+  )} <span class='deg-c'>°C</span>`;
+  const humidityElement = document.querySelector(".humidity");
+  humidityElement.innerHTML = `Humidity: <br> <i class="fa-solid fa-droplet"></i> ${humidity} %`;
+
+  // min and max temperatures
+  const minTempElement = document.querySelector(".min-temp");
+  const maxTempElement = document.querySelector(".max-temp");
+
+  minTempElement.innerHTML = `Min: ${Math.floor(minTemp)} °C`;
+  maxTempElement.innerHTML = `Max: ${Math.floor(maxTemp)} °C`;
+
   // wind speed
   const wind = data.wind;
   const { speed: windSpeed } = wind;
-  console.log(windSpeed);
 
-  windSpeedEle.textContent = `Windspeed: ${windSpeed}km/h`;
-  // country and city name
+  windSpeedElement.innerHTML = `Windspeed: <i class="fa-solid fa-wind"></i> ${Math.floor(
+    windSpeed
+  )} km/h`;
+
+  // sunrise and sunset
+  const sunriseElement = document.querySelector(".sunrise");
+  const sunsetElement = document.querySelector(".sunset");
+
+  const time = data.sys;
+  const { sunrise: sunriseString, sunset: sunsetString } = time;
+
+  const fullSunrise = new Date(sunriseString * 1000);
+  const fullSunset = new Date(sunsetString * 1000);
+
+  const riseHours = fullSunrise.getHours();
+  const riseMunites = fullSunrise.getMinutes();
+
+  const setHours = fullSunset.getHours();
+  const setMunites = fullSunset.getMinutes();
+
+  sunriseElement.innerHTML = `Sunrise: <i class="fa-solid fa-sun"></i> 0${riseHours}:${riseMunites} am`;
+  sunsetElement.innerHTML = `Sunset: <i class="fa-solid fa-moon"></i> ${setHours}:${setMunites} pm`;
 }
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    fetchWeatherData();
+  }
+});
