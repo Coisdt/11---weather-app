@@ -30,12 +30,9 @@ function errorMessage(data) {
   const errorMessage = data.message;
   if (errorCode === 200) {
     //please note that the error code for 200 is a number
-    errorMessageElement.style.display = "none";
     errorMessageElement.classList.remove("show-error");
     weatherSection.classList.add("show");
     displayWeather(data);
-   
-    //show city
     showCity(data);
     console.log("200 working");
     input.value = "";
@@ -44,7 +41,7 @@ function errorMessage(data) {
     console.log("200 NOT working");
   }
   if (errorCode === "400" && input.value === "") {
-    //please note that the error code for 400 is a string in the API
+    //please note that the error code for 400 is a string in the fAPI
     weatherSection.classList.remove("show");
     errorMessageElement.classList.add("show-error");
     errorMessageElement.textContent = `Please enter your location!`;
