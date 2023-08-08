@@ -108,8 +108,8 @@ function displayWeather(data) {
 
   // update time
   const date = new Date();
-  const hours = date.getHours();
-  const munites = date.getMinutes();
+  const hours = isOnlyOneCharLong(date.getHours());
+  const munites = isOnlyOneCharLong(date.getMinutes());
 
   const timeStamp = document.querySelector(".updated-time");
   timeStamp.innerHTML = `Updated: ${hours}:${munites}`;
@@ -154,13 +154,13 @@ function displayWeather(data) {
   const fullSunrise = new Date(sunriseString * 1000);
   const fullSunset = new Date(sunsetString * 1000);
 
-  const riseHours = fullSunrise.getHours();
-  const riseMunites = fullSunrise.getMinutes();
+  const riseHours = isOnlyOneCharLong(fullSunrise.getHours());
+  const riseMunites = isOnlyOneCharLong(fullSunrise.getMinutes());
 
-  const setHours = fullSunset.getHours();
-  const setMunites = fullSunset.getMinutes();
+  const setHours = isOnlyOneCharLong(fullSunset.getHours());
+  const setMunites = isOnlyOneCharLong(fullSunset.getMinutes());
 
-  sunriseElement.innerHTML = `Sunrise: <i class="fa-solid fa-sun"></i> 0${riseHours}:${riseMunites} am`;
+  sunriseElement.innerHTML = `Sunrise: <i class="fa-solid fa-sun"></i> ${riseHours}:${riseMunites} am`;
   sunsetElement.innerHTML = `Sunset: <i class="fa-solid fa-moon"></i> ${setHours}:${setMunites} pm`;
 }
 
@@ -169,3 +169,15 @@ window.addEventListener("keydown", (e) => {
     fetchWeatherData();
   }
 });
+
+function isOnlyOneCharLong(number) {
+  const numberString = number.toString();
+  if (numberString.length === 1) {
+    return (number = "0" + number);
+  } else {
+    return number;
+  }
+}
+
+// isOnlyOneCharLong(12)
+// console.log(isOnlyOneCharLong(12));
