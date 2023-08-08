@@ -29,7 +29,6 @@
   display: grid;
   padding: 20px;
   width: 370px;
-  /* height: 500px; */
 }
 
 .app-title {
@@ -42,7 +41,7 @@
 .app-center {
   display: flex;
   flex-direction: column;
-  /* height: 500px; */
+  gap: 10px;
 }
 
 /*  =========================================== search bar */
@@ -54,6 +53,7 @@
   height: 65px;
   justify-content: center;
   border: 1px solid;
+  border-radius: 15px;
 }
 
 .search-bar-container {
@@ -110,15 +110,19 @@
   background-color: rgba(47, 72, 109, 0.712);
   width: 100%;
   gap: 30px;
+  border-radius: 15px;
 }
 
 .show {
   display: grid;
 }
 
+.hide {
+  display: none;
+}
+
 .weather-display-container {
   display: grid;
-  height: 400px;
 }
 
 .main-forecast {
@@ -151,7 +155,7 @@
 .updated-time {
   display: grid;
   justify-content: center;
-  height: 15px;
+  height: 20px;
 }
 
 .updated-time {

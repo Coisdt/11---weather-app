@@ -5,7 +5,7 @@ const weatherSection = document.querySelector(".weather-display-section");
 // ============= fetch data
 async function fetchWeatherData() {
   const response = await fetch(
-    URL + `${input.value}&appid=${apiKey}&units=metric`
+    URL + `${input.value.trim()}&appid=${apiKey}&units=metric`
   );
   const data = await response.json();
   console.log(data);
@@ -24,33 +24,49 @@ searchBtn.addEventListener("click", () => {
 
 // ============ error message
 function errorMessage(data) {
-  const errorMessageElement = document.querySelector(".error-message");
+  let errorMessageElement = document.querySelector(".error-message");
   const errorCode = data.cod;
   console.log(errorCode);
   const errorMessage = data.message;
-  if (errorCode === "400") {
-    //please note that the error code for 400 is a string in the API
-    errorMessageElement.textContent = `${errorMessage}!`;
-    errorMessageElement.classList.add("show-error");
-    weatherSection.classList.remove("show");
-    console.log("400 working");
-  } else {
-    console.log("400 NOT working");
-  }
-
   if (errorCode === 200) {
     //please note that the error code for 200 is a number
     errorMessageElement.style.display = "none";
     errorMessageElement.classList.remove("show-error");
     weatherSection.classList.add("show");
     displayWeather(data);
+   
     //show city
     showCity(data);
     console.log("200 working");
+    input.value = "";
+    return;
   } else {
     console.log("200 NOT working");
   }
-  input.value = "";
+  if (errorCode === "400" && input.value === "") {
+    //please note that the error code for 400 is a string in the API
+    weatherSection.classList.remove("show");
+    errorMessageElement.classList.add("show-error");
+    errorMessageElement.textContent = `Please enter your location!`;
+    console.log("400 working");
+    input.value = "";
+    return;
+  } else {
+    console.log("400 NOT working");
+  }
+
+  if (errorCode === "404") {
+    //please note that the error code for 404 is a string in the API
+    // this is when the city is not found
+    weatherSection.classList.remove("show");
+    errorMessageElement.classList.add("show-error");
+    errorMessageElement.textContent = `City not found!`;
+    console.log("404 working");
+    // input.value.trim() = "";
+    return;
+  } else {
+    console.log("404 NOT working");
+  }
 }
 
 // show city
@@ -58,7 +74,7 @@ function showCity(data) {
   const cityNameElement = document.querySelector(".city-name");
   const cityName = data.name;
   const countryData = data.sys;
-  const {country} = countryData
+  const { country } = countryData;
   console.log(cityName);
   cityNameElement.textContent = `${cityName}, ${country}`;
 }
