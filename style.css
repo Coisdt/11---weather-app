@@ -31,6 +31,13 @@
   width: 370px;
 }
 
+.tall-guy-title{
+  color: black;
+  justify-content: center;
+  display: grid;
+  font-size: 12px;
+}
+
 .app-title {
   display: grid;
   justify-content: center;
@@ -171,9 +178,6 @@
   height: 100px;
 }
 
-.second {
-  /* height: 0px; */
-}
 
 .min-max-temp,
 .wind-speed,
