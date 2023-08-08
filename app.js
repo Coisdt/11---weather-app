@@ -143,6 +143,7 @@ function displayWeather(data) {
   windSpeedElement.innerHTML = `Windspeed: <i class="fa-solid fa-wind"></i> ${Math.floor(
     windSpeed
   )} km/h`;
+  // update
 
   // sunrise and sunset
   const sunriseElement = document.querySelector(".sunrise");
